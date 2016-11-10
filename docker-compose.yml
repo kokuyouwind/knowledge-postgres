@@ -1,0 +1,19 @@
+version: '2'
+services:
+  docker-knowledge:
+    image: koda/docker-knowledge
+    volumes:
+      - ./tmp:/root/.knowledge
+    ports:
+      - 8080:8080
+    links:
+      - postgres
+    restart: always
+  postgres:
+    image: kiasaki/alpine-postgres:9.6
+    restart: always
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+volumes:
+  pgdata:
+    driver: local
